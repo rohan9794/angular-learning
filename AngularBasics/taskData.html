@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+	<head>
+		<title>AngularJS Data Binding</title>
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.js"></script>
+	</head>
+	<body ng-controller="AppCtrl">
+		<h1>Task Data Binding</h1>
+		Task: <span id="task">{{taskData.task}}</span><br>
+		Status: <input type="checkbox" id="statusCheck" ng-model="taskData.status" ng-click="onStatusClick()">
+		
+		<script>
+			(function(){
+				var name="myApp",
+				requires=[],
+				myApp=null;
+				taskData={
+					task: "Deep Dive & Understand AngularJS",
+					status: true
+				};
+				
+				myApp=angular.module(name, requires);
+				
+				myApp.controller("AppCtrl", function($scope){
+					$scope.taskData=taskData;
+					
+					$scope.onStatusClick= function(){
+						console.log("status: ", taskData.status);
+					}
+				});
+			}());
+		</script>
+	</body>
+</html>

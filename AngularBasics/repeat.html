@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+	<head>
+		<script src="angular.js"></script>
+		<script>
+			(function(){
+				var name="myApp",
+				requires=[],
+				myApp=null;
+				
+				myApp= angular.module(name, requires);
+				
+				myApp.controller("AppCtrl", function($scope){
+					$scope.contacts=[
+					{firstName: "Rohan", lastName: "Bhatia", favourite: true},
+					{firstName: "Sid", lastName: "Kumar", favourite: true},
+					{firstName: "Kartik", lastName: "Maharishi", favourite: true},
+					{firstName: "Shivanshu", lastName: "Kapoor", favourite: false}];
+				});
+			}());
+		</script>
+		<style>
+			.odd{
+				background-color: white;
+			}
+			.even{
+				background-color: gray;
+			}
+		</style>
+	</head>
+	<body ng-controller="AppCtrl">
+		<ul>
+			<li ng-repeat="(key, value) in contacts[0]">{{key}}- {{value}}</li>
+		</ul>
+		<ul>
+			<li ng-repeat="prop in contacts[0]">{{prop}}</li>
+		</ul>
+		<table>
+			<tr>
+				<th>S.No.</th>
+				<th>FirstName</th>
+				<th>LastName</th>
+				<th>Favourite</th>
+				<th>First</th>
+				<th>last</th>
+				<th>Middle</th>
+			</tr>
+			<tr ng-repeat="contact in contacts" ng-class=" $odd? 'odd': 'even'">
+				<td>{{$index+1}}</td>
+				<td>{{contact.firstName}}</td>
+				<td>{{contact.lastName}}</td>
+				<td>{{contact.favourite}}</td>
+				<td>{{$first}}</td>
+				<td> {{$last}}</td>
+				<td> {{$middle}}</td>
+			</tr>
+		</table>
+		<table>
+			<tbody>
+				<tr ng-repeat-start="contact in contacts">
+					<td>{{$index+1}}</td>
+				</tr>
+				<tr>
+					<td>{{contact.firstName}}</td>
+				</tr>
+				<tr ng-repeat-end>
+					<td> contact {{$index+1}} is {{contact.favourite? ' ': 'not'}} favourite</td>
+				</tr>
+			</tbody>
+		</table>
+	</body>
+</html>

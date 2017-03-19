@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+	<head>
+		<title> using the ng-switch Directive </title>
+		<script src="angular.js"></script>
+		<script>
+			( function() {
+					var name = "myApp",
+					    requires = [],
+					    myApp = null;
+
+					myApp = angular.module(name, requires);
+
+					myApp.controller("AppCtrl", function($scope) {
+
+						$scope.$on("removeProduct", function(evt, data){
+							console.log("product removed: "+ data.name);
+						});
+					});
+					
+					myApp.controller("productCtrl", function($scope, $rootScope){
+						
+						$scope.products=[{name: 'Iphone7', price: 600},
+						{name: 'Samasung S7 edge', price: 550}, {name: 'OnePlus 3T', price: 399},
+						{name: 'OnePlus 3', price: 349}, {name: 'Samsung Note 7', price: 549},
+						{name: 'Iphone 6s', price: 500}
+						];
+						
+						$scope.addToCart= function(product){
+							$rootScope.$broadcast("addProduct", product);
+						};
+					});
+					
+					myApp.controller("cartCtrl", function($scope){
+						$scope.cart=[];
+						
+						$scope.$on("addProduct", add);
+						
+						function add(evt, product){
+							$scope.cart.push(product);
+						}
+						$scope.removeFromCart= function(product){
+							$scope.$emit("removeProduct", product);
+						};
+					});
+				}());
+		</script>
+		
+		
+	</head>
+	<body ng-controller="AppCtrl">
+
+<h2> Products</h2>
+		 <table ng-controller="productCtrl">
+		 	<tbody>
+		 		<tr>
+		 			<th>S.No.</th>
+		 			<th>product</th>
+		 			<th>Price</th>
+		 			
+		 		</tr>
+		 		<tr ng-repeat="product in products">
+		 			<td>{{$index+1}}</td>
+		 			<td>{{product.name}}</td>
+		 			<td>{{product.price | currency}}</td>
+		 			<td><button ng-click="addToCart(product)">Add To Cart</button></td>
+		 		</tr>
+		 	</tbody>
+		 </table>
+		 <h2>
+		 	Cart
+		 </h2>
+		 <table ng-controller="cartCtrl">
+		 	<tbody>
+		 		<tr>
+		 			<th>S.No.</th>
+		 			<th>product</th>
+		 			<th>Price</th>
+		 			
+		 		</tr>
+		 		<tr ng-repeat="product in cart">
+		 			<td>{{$index+1}}</td>
+		 			<td>{{product.name}}</td>
+		 			<td>{{product.price | currency}}</td>
+		 			<td><button ng-click="removeFromCart(product)">Remove From Cart</button></td>
+		 		</tr>
+		 		
+		 	</tbody>
+		 </table>
+	</body>
+</html>

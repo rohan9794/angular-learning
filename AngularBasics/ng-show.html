@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+	<head>
+		<title> using the ng-switch Directive </title>
+		<script src="angular.js"></script>
+		<script>
+			( function() {
+					var name = "myApp",
+					    requires = [],
+					    myApp = null;
+
+					myApp = angular.module(name, requires);
+
+					myApp.controller("AppCtrl", function($scope) {
+
+						$scope.contacts = [{
+							firstName : "Rohan",
+							lastName : "Bhatia",
+							favourite : true
+						}, {
+							firstName : "Sid",
+							lastName : "Kumar",
+							favourite : true
+						}, {
+							firstName : "Kartik",
+							lastName : "Maharishi",
+							favourite : true
+						}, {
+							firstName : "Shivanshu",
+							lastName : "Kapoor",
+							favourite : false
+						}];
+						
+						$scope.showStatus=false;
+						$scope.showForm= function(){
+							$scope.showStatus=true;
+						};
+					});
+				}());
+		</script>
+		
+		<style>
+			.odd{
+			background-color: gray;	
+			}
+			.even{
+				background-color: yellow;
+			}
+		</style>
+	</head>
+	<body ng-controller="AppCtrl">
+
+		<table>
+			<tr>
+				<th>S.No.</th>
+				<th>FirstName</th>
+				<th>LastName</th>
+				<th>Favourite</th>
+			</tr>
+			<tr ng-repeat="contact in contacts" ng-class=" $odd? 'odd': 'even'" ng-if="contact.favourite">
+				<td>{{$index+1}}</td>
+				<td>{{contact.firstName}}</td>
+				<td>{{contact.lastName}}</td>
+				<td>{{contact.favourite}}</td>
+			</tr>
+		</table>
+		
+		<br />
+		<br />
+		
+		<button ng-click="showForm()">Add New Contact</button>
+		<form ng-show="showStatus">
+			FirstName: <input type="text" name="first" /><br />
+			LastName: <input type="text" name="last" /><br />
+			Favourite: <input type="checkbox" />
+			<button type="submit">Submit</button>
+			<button ng-click="showStatus= false">Cancel</button>
+		</form>
+	</body>
+</html>

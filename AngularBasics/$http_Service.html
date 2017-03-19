@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+	<head>
+		<title> using the ng-switch Directive </title>
+		<script src="angular.js"></script>
+		<script>
+			( function() {
+					var name = "myApp",
+					    requires = [],
+					    myApp = null;
+
+					myApp = angular.module(name, requires);
+
+					myApp.controller("AppCtrl", function($scope, $http) {
+
+						$scope.items=[];
+						
+						$scope.loadItems= function(){
+							$http.get("items.json")
+							.success(function(data){
+								$scope.items=data;
+							})
+							.error(function(data){
+								console.log("something went wrong with "+ data);
+							});
+						};
+					});
+					
+					
+				}());
+		</script>
+		
+		
+	</head>
+	<body ng-controller="AppCtrl">
+
+
+		 <table>
+		 	<tbody>
+		 		<tr>
+		 			<th>S.No.</th>
+		 			<th>product</th>
+		 			<th>Price</th>
+		 			
+		 		</tr>
+		 		<tr ng-repeat="product in items">
+		 			<td>{{$index+1}}</td>
+		 			<td>{{product.name}}</td>
+		 			<td>{{product.price | currency}}</td>
+		 			
+		 		</tr>
+		 	</tbody>
+		 </table>
+		 <button ng-click="loadItems()">load Items</button>
+		 
+	</body>
+</html>

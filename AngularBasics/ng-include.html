@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+	<head>
+		<script src="angular.js"></script>
+		<script>
+			(function(){
+				var name="myApp",
+				requires=[],
+				myApp=null;
+				
+				myApp= angular.module(name, requires);
+				
+				myApp.controller("AppCtrl", function($scope){
+					$scope.contacts=[
+					{firstName: "Rohan", lastName: "Bhatia", favourite: true},
+					{firstName: "Sid", lastName: "Kumar", favourite: true},
+					{firstName: "Kartik", lastName: "Maharishi", favourite: true},
+					{firstName: "Shivanshu", lastName: "Kapoor", favourite: false}];
+					
+					$scope.url="contacts_table.html";
+					
+					$scope.viewFile= function(){
+						if($scope.viewState){
+							return "contacts_list.html";
+						}else{
+							return "contacts_table.html";
+						}
+					};
+				});
+			}());
+		</script>
+		<style>
+			.odd{
+				background-color: white;
+			}
+			.even{
+				background-color: gray;
+			}
+		</style>
+	</head>
+	<body ng-controller="AppCtrl">
+		<input type="checkbox" ng-model="viewState">Toggle for List View
+		<ng-include src="viewFile()"></ng-include>
+		
+	</body>
+</html>

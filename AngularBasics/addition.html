@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+	<head>
+		<title>Addition of Two numbers using Agular</title>
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.js"></script>
+		<script src="operation.js"></script>
+	</head>
+	<body ng-controller="AppCtrl as app">
+		<h1>Addition/Subtraction of two numbers:</h1>
+		<label>first number: </label>
+		<input type="text" id="firstNum" ng-model="app.firstNum"/> <br>
+		<label>Second number: </label>
+		<input type="text" id="secondNum" ng-model="app.secondNum"/><br>
+		<button id="addition" ng-click="app.setOperator('+')">+</button>
+		<button id="subtraction" ng-click="app.setOperator('-')">-</button><br>
+		<button id="calculateBtn" ng-click="app.calculate(app.firstNum, app.secondNum)">Calculate</button><br>
+		<label>Result: </label>
+		<p id="result"> {{app.result}}</p>
+	</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+	<head>
+		<title> using the ng-switch Directive </title>
+		<script src="angular.js"></script>
+		<script>
+			( function() {
+					var name = "myApp",
+					    requires = [],
+					    myApp = null;
+
+					myApp = angular.module(name, requires);
+
+					myApp.controller("AppCtrl", function($scope) {
+
+						
+					});
+				}());
+		</script>
+		
+		<style>
+		.strike{
+			text-decoration: line-through;
+		}
+		.red{
+			color: red;
+		}
+		.bold{
+			font-weight: bold;
+		}	
+		</style>
+	</head>
+	<body ng-controller="AppCtrl">
+
+		<input type="text" placeholder="type red strike bold" ng-model="style">
+		<p ng-class="style">this is the first para of this page</p>
+		
+		<hr>
+		<input type="checkbox" ng-model="delete"/> click this for strike through<br>
+		<input type="checkbox" ng-model="error" /> click this for red colour<br>
+		<input type="checkbox" ng-model="strong" />click this for bold text
+		<p ng-class="{strike: delete, red: error, bold: strong}">this is the 2nd para</p>
+	</body>
+</html>

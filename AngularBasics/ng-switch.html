@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+	<head>
+		<title>
+			using the ng-switch Directive
+		</title>
+		<script src="angular.js"></script>
+		<script>
+		(function(){
+			var name="myApp",
+			requires=[],
+			myApp=null;
+			
+			myApp= angular.module(name, requires);
+			
+			myApp.controller("AppCtrl", function($scope){
+				$scope.data={};
+			});
+		}());
+		</script>
+	</head>
+	<body ng-controller="AppCtrl">
+		<div ng-repeat="channel in ['none', 'StarTV', 'StarWorld']">
+			<input type="radio" name="leisure" value={{channel}} 
+			ng-model="data.whichChannel" checked="$first" ng-cloak/>{{channel}}
+		</div>
+		<div ng-switch on="data.whichChannel">
+			<div ng-switch-when="StarTV">You are watching StarTV</div>
+			<div ng-switch-when="StarWorld">You are watching StarWorld</div>
+			<div ng-switch-default>You are watching nothing</div>
+		</div>
+		
+	</body>
+</html>
